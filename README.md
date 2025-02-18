@@ -49,7 +49,7 @@ Pages
 
   Database Setup
     Create a database in MySQL named fitness_buddy.
-    Import the provided SQL file (if any) to set up the necessary tables like users, posts, etc.
+    Import the provided SQL file to set up the necessary tables like users, posts, etc.
     Update Database Configuration
 
 In the db.php file, ensure that the database connection details (username, password) are correctly set.
