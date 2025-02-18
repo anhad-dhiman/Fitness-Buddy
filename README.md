@@ -22,9 +22,9 @@ Pages
   
   2. Create Post Page (create_post.php)
   This page allows users to create a new post. The user is prompted to provide content for the post. Once the user submits the form, the post is stored in the database and displayed on the home page.
-  
   Content: Users can share their thoughts, progress, or tips regarding fitness.
   Session Handling: The user must be logged in to create a post. If the user is not logged in, they will be prompted to log in first.
+  
   3. Post View Page (post.php)
   When users click on the "View Post" button from the home page, they are taken to this page where they can see the full content of the post along with more details.
   
