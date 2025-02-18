@@ -28,6 +28,14 @@ Pages
   3. Post View Page (post.php)
   When users click on the "View Post" button from the home page, they are taken to this page where they can see the full content of the post along with more details.
   
+  4. Login and Registration Pages
+    The application includes login and registration features, which are essential for users to create and manage their posts. These features are handled by the following files:
+    api_login.php: Handles the login logic. It verifies user credentials and establishes a session for authenticated users.
+    api_register.php: Handles the registration logic. It allows new users to sign up for the platform by providing necessary details, such as username, password, etc.
+    login.php: The front-end page where users can input their credentials (username and password) to log in.
+    register.php: The front-end page where new users can sign up for an account by providing their username, email, and password.
+    Once users are logged in, they are granted access to create posts and interact with the content. The login page is displayed for users who are not authenticated, and the register page is available for new         users to create an account.
+  
   Post Content: Displays the full content of the selected post.
   User Info: Displays the username of the person who created the post.
   Date/Time: Shows when the post was made.
