@@ -14,12 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Extract values from the JSON data
-    $username = trim($data['username']);
     $email = trim($data['email']);
     $password = $data['password'];
+    $membershipTier = $data['membershipTier'];
+
+    // We no longer have username in the form, so create one from email
+    $username = explode('@', $email)[0]; // Use part before @ as username
 
     // Validate fields
-    if (empty($username) || empty($email) || empty($password)) {
+    if (empty($email) || empty($password)) {
         echo json_encode(["status" => "error", "message" => "All fields are required."]);
         exit();
     }
@@ -49,11 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user into the database using PDO
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (:username, :email, :password_hash)");
+    // Insert user into the database using PDO with the new membership tier field
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash, membership_tier) VALUES (:username, :email, :password_hash, :membership_tier)");
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':password_hash', $hashedPassword, PDO::PARAM_STR);
+    $stmt->bindParam(':membership_tier', $membershipTier, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Account created successfully!"]);
