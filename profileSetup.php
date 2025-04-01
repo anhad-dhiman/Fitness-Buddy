@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $params[':membership_tier'] = $_POST['membership_tier'];
     }
 
-    // Handle file upload
+    // Handle picture upload
     if (!empty($_FILES['profile_picture']['name'])) {
         $targetDir = "./uploads/profile_images/";
         $fileName = time() . "_" . basename($_FILES["profile_picture"]["name"]);

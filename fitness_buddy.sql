@@ -23,11 +23,14 @@ CREATE TABLE messages (
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
     message TEXT NOT NULL,
+    status VARCHAR(50) DEFAULT 'sent',  
+    reported BOOLEAN DEFAULT FALSE,  
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES users(id),
     FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
+<<<<<<< HEAD
 CREATE TABLE user_profiles (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) NOT NULL,
@@ -43,4 +46,41 @@ CREATE TABLE user_profiles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     profile_picture VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+=======
+CREATE TABLE reported_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message_id INT NOT NULL,
+    reporter_id INT NOT NULL,
+    reason TEXT NOT NULL,
+    reported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (message_id) REFERENCES messages(id),
+    FOREIGN KEY (reporter_id) REFERENCES users(id)
+);
+
+CREATE TABLE blocked_users (
+    blocker_id INT NOT NULL,
+    blocked_id INT NOT NULL,
+    PRIMARY KEY (blocker_id, blocked_id),
+    FOREIGN KEY (blocker_id) REFERENCES users(id),
+    FOREIGN KEY (blocked_id) REFERENCES users(id)
+);
+
+CREATE TABLE payment_information (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    cardholder_name VARCHAR(255) NOT NULL,
+    card_number_last_four CHAR(4) NOT NULL,
+    card_type VARCHAR(50) NOT NULL,
+    expiration_date CHAR(7) NOT NULL,
+    cvc_verified BOOLEAN DEFAULT 0,
+    billing_address VARCHAR(255) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    province VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX (user_id)
+>>>>>>> 0456b52 (message functionality not working)
 );
