@@ -214,7 +214,8 @@ require 'db.php';
             fetch("api_register.php", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Accept": "application/json" // Jag~
                 },
                 body: JSON.stringify(data)
             })
@@ -223,7 +224,7 @@ require 'db.php';
                     const messageBox = document.getElementById("registerMessage");
                     if (data.status === "success") {
                         messageBox.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-                        setTimeout(() => window.location.href = "login.php", 2000);
+                        setTimeout(() => window.location.href = data.redirect || "profileSetup.php", 2000); // Jag~ 
                     } else {
                         messageBox.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
                     }
