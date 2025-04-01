@@ -30,7 +30,6 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
-<<<<<<< HEAD
 CREATE TABLE user_profiles (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) NOT NULL,
@@ -46,7 +45,6 @@ CREATE TABLE user_profiles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     profile_picture VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-=======
 CREATE TABLE reported_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     message_id INT NOT NULL,
@@ -82,5 +80,4 @@ CREATE TABLE payment_information (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX (user_id)
->>>>>>> 0456b52 (message functionality not working)
 );
