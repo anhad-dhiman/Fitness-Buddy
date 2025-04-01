@@ -45,6 +45,8 @@ CREATE TABLE user_profiles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     profile_picture VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE reported_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     message_id INT NOT NULL,
