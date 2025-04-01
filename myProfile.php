@@ -70,25 +70,32 @@ function capFirstLetter($string)
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left navigation items -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="myProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Matches</a> <!-- You need to replace the # when work on matches -->
+                        <a class="nav-link" href="#">Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="send_message.php">Message</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="forum.php">Forum</a>
-                        <!-- You need to replace the # when work on matches -->
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+
+                <!-- Centered search form -->
+                <form class="d-flex mx-auto" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
+
+                <!-- Right-aligned logout -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="logout.php" class="btn btn-outline-light ms-2">Logout</a>
+                        <a href="logout.php" class="btn btn-outline-light">Logout</a>
                     </li>
                 </ul>
             </div>

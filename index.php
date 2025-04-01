@@ -48,6 +48,9 @@ $user_id = $_SESSION['user_id'] ?? null;
                         <a class="nav-link" href="#">Matches</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="send_message.php">Message</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="forum.php">Forum</a>
                     </li>
                 </ul>
