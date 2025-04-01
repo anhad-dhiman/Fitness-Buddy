@@ -14,14 +14,13 @@ session_start();
 $user_id = $_SESSION['user_id'] ?? null;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Buddy - Home</title>
+    <title>Fitness Buddy - Forum</title> <!-- Changed title to reflect Forum page -->
     <!-- MDB JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
@@ -30,7 +29,7 @@ $user_id = $_SESSION['user_id'] ?? null;
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Nav Bar Starts -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: salmon;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">Fitness Buddy</a>
@@ -45,19 +44,26 @@ $user_id = $_SESSION['user_id'] ?? null;
                         <a class="nav-link" href="myProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Matches</a>
+                        <a class="nav-link" href="#">Matches</a> <!-- You need to replace the # when work on matches -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="forum.php">Forum</a>
+                        <!-- You need to replace the # when work on matches -->
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="logout.php" class="btn btn-outline-light ms-2">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- Nav Bar Ends Here -->
     <div class="container mt-4">
         <h2 class="mb-4">Recent Posts</h2>
         <!-- Check if the user is logged in -->

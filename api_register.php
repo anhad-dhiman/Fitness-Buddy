@@ -1,7 +1,7 @@
 <?php
 require_once 'db.php'; // Your database connection
 
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the raw POST data and decode it as JSON
@@ -60,14 +60,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bindParam(':membership_tier', $membershipTier, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "Account created successfully!"]);
+        // Jag~ profileSetup redirect
+        session_start(); // Start a session and store the user ID
+        $_SESSION['user_id'] = $conn->lastInsertId();
+
+        // Redirection based on accept header
+        if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
+            // API request - return JSON
+            header('Content-Type: application/json');
+            echo json_encode(["status" => "success", "message" => "Account created successfully!", "redirect" => "profileSetup.php"]);
+        } else {
+            // Direct browser request - redirect
+            header("Location: profileSetup.php");
+            exit();
+        }
     } else {
+        header('Content-Type: application/json');  
+        // Jag~ End
         echo json_encode(["status" => "error", "message" => "Something went wrong. Try again."]);
     }
 
     $stmt = null;
     $conn = null;
 } else {
+    header('Content-Type: application/json');
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
 ?>

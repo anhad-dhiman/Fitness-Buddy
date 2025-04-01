@@ -173,3 +173,40 @@ textarea.form-control:focus,
 .btn-save:hover {
     background-color: #ff7c66;
 }
+
+/*Jag's code to make shared location a nice colour*/
+.share-location-message {
+    color: #666; /* Light gray color */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px;
+}
+
+/*Jag's code to make payment section look nice*/
+#paymentSection {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+#paymentSection h5 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+#paymentSection .alert-info {
+    background-color: #e8f4fd;
+    border-color: #b6dffc;
+}
+
+#paymentSection input.is-invalid {
+    border-color: #dc3545;
+}
+
+#paymentSection .text-muted {
+    font-size: 0.8rem;
+}
+/*Jag Code End*/

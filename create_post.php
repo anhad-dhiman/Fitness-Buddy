@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$user_id, $content]);
 
         // Redirect to the home page after creating a post
-        header("Location: index.php");
+        header("Location: forum.php");
         exit();
     } else {
         // Handle invalid form submission or user not logged in

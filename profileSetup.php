@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require 'db.php';
 session_start();
 
@@ -16,7 +16,7 @@ $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Check if profile exists for this user
-$profileStmt = $conn->prepare("SELECT * FROM user_profiles WHERE user_id = :user_id");
+$profileStmt = $conn->prepare("SELECT * FROM profile WHERE user_id = :user_id");
 $profileStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
 $profileStmt->execute();
 $profile = $profileStmt->fetch(PDO::FETCH_ASSOC);
@@ -29,7 +29,7 @@ $paymentInfo = $paymentStmt->fetch(PDO::FETCH_ASSOC);
 
 // create a profile record if it doesn't exist
 if (!$profile) {
-    $createProfileStmt = $conn->prepare("INSERT INTO user_profiles (user_id) VALUES (:user_id)");
+    $createProfileStmt = $conn->prepare("INSERT INTO profile (user_id) VALUES (:user_id)");
     $createProfileStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $createProfileStmt->execute();
 }
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($updateFields)) {
-        $query = "UPDATE user_profiles SET " . implode(', ', $updateFields) . " WHERE user_id = :user_id";
+        $query = "UPDATE profile SET " . implode(', ', $updateFields) . " WHERE user_id = :user_id";
         $updateStmt = $conn->prepare($query);
         $updateStmt->execute($params);
     }
