@@ -40,6 +40,39 @@ $matchesStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
 $matchesStmt->execute();
 $matches = $matchesStmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Get list of blocked users
+$blockedUsersStmt = $conn->prepare("
+    SELECT bu.blocked_id, u.username
+    FROM blocked_users bu
+    JOIN users u ON bu.blocked_id = u.id
+    WHERE bu.blocker_id = :user_id
+    ORDER BY u.username
+");
+$blockedUsersStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+$blockedUsersStmt->execute();
+$blockedUsers = $blockedUsersStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Handle unblock user action
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unblock_user'])) {
+    $unblockedUserId = (int) $_POST['user_id'];
+
+    $unblockStmt = $conn->prepare("
+        DELETE FROM blocked_users 
+        WHERE blocker_id = :blocker_id AND blocked_id = :blocked_id
+    ");
+    $unblockStmt->bindParam(':blocker_id', $userId, PDO::PARAM_INT);
+    $unblockStmt->bindParam(':blocked_id', $unblockedUserId, PDO::PARAM_INT);
+
+    if ($unblockStmt->execute()) {
+        $successMessage = "User has been unblocked successfully.";
+        // Redirect to refresh the page
+        header("Location: send_message.php?unblocked=1");
+        exit();
+    } else {
+        $errorMessage = "Failed to unblock user. Please try again.";
+    }
+}
+
 // Handle block user action
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['block_user'])) {
     $blockedUserId = (int) $_POST['user_id'];
@@ -321,6 +354,56 @@ function formatMessageDate($dateString)
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <!-- After the error and success messages, before the if(empty($matches)) check -->
+        <?php if (isset($_GET['unblocked']) && $_GET['unblocked'] == 1): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                User has been unblocked successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <!-- Add a button to access blocked users management even when there are no matches -->
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#manageBlockedModal">
+                <i class="fas fa-user-slash me-2"></i> Manage Blocked Users
+            </button>
+        </div>
+
+        <!-- Move the Manage Blocked Users modal here, outside of any conditionals -->
+        <div class="modal fade" id="manageBlockedModal" tabindex="-1" aria-labelledby="manageBlockedModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="manageBlockedModalLabel">Manage Blocked Users
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php if (empty($blockedUsers)): ?>
+                            <p class="text-center">You haven't blocked any users.</p>
+                        <?php else: ?>
+                            <div class="list-group">
+                                <?php foreach ($blockedUsers as $blockedUser): ?>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><?= htmlspecialchars($blockedUser['username']) ?></span>
+                                        <form method="POST">
+                                            <input type="hidden" name="user_id" value="<?= $blockedUser['blocked_id'] ?>">
+                                            <button type="submit" name="unblock_user" class="btn btn-sm btn-outline-success">
+                                                <i class="fas fa-user-check me-1"></i> Unblock
+                                            </button>
+                                        </form>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <?php if (isset($_GET['blocked']) && $_GET['blocked'] == 1): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -374,7 +457,7 @@ function formatMessageDate($dateString)
                                     <div class="chat-header d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">Chat with <?= htmlspecialchars($selectedUsername) ?></h5>
 
-                                        <!-- Action dropdown (Block, Report) -->
+                                        <!-- Action dropdown (Block) -->
                                         <div class="dropdown action-dropdown">
                                             <button class="btn btn-sm btn-outline-secondary" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -442,21 +525,21 @@ function formatMessageDate($dateString)
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to block
-                                                        <?= htmlspecialchars($selectedUsername) ?>? They will no longer be able
-                                                        to message you, and you won't see them in your matches.
-                                                    </p>
-                                                    <form method="POST" id="blockUserForm">
+                                                <form method="POST" id="blockUserForm">
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to block
+                                                            <?= htmlspecialchars($selectedUsername) ?>? They will no longer be
+                                                            able to message you, and you won't see them in your matches.
+                                                        </p>
                                                         <input type="hidden" name="user_id" value="<?= $selectedUserId ?>">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" form="blockUserForm" name="block_user"
-                                                        class="btn btn-danger">Block User</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" name="block_user" class="btn btn-danger">Block
+                                                            User</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

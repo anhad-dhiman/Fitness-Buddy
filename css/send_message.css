@@ -147,10 +147,26 @@
 }
 
 /* Action buttons */
-.action-dropdown .dropdown-item:hover {
+/* .action-dropdown .dropdown-item:hover {
     background-color: #f8f9fa;
 }
 
 .action-dropdown .dropdown-item.text-danger:hover {
     background-color: #f8d7da;
+} */
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.action-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.action-dropdown .btn {
+    padding: 6px 10px;
+}
+
+.dropdown-menu {
+    transition: opacity 0.3s;
 }
