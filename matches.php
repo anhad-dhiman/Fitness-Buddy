@@ -240,55 +240,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_action'])) {
     <title>Find Matches - Fitness Buddy</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/profileSetup.css">
-    <style>
-        /* Profile picture sizing */
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* Match cards styling */
-        .match-score {
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        /* Card height control */
-        .card {
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .match-score {
-            background-color: salmon;
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 1rem;
-        }
-
-        .request-pending {
-            border-left: 4px solid #ffc107;
-        }
-
-        .request-accepted {
-            border-left: 4px solid #28a745;
-        }
-
-        .request-declined {
-            border-left: 4px solid #dc3545;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/matches.css">
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Nav Bar Starts -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: salmon;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">Fitness Buddy</a>
@@ -298,27 +254,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_action'])) {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left navigation items -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="myProfile.php">Profile</a>
+                        <a class="nav-link" href="myProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="matches.php">Matches</a> <!-- Jag~ Updated link -->
+                        <a class="nav-link" href="matches.php">Matches</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="send_message.php">Message</a> <!-- Jag~ Updated link -->
+                        <a class="nav-link" href="send_message.php">Message</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="forum.php">Forum</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
+
+                <!-- Right-aligned logout -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="logout.php" class="btn btn-outline-light">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- Nav Bar Ends Here -->
 
     <div class="container mt-4">
         <!-- Success messages -->

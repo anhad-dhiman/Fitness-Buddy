@@ -28,7 +28,7 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
-CREATE TABLE profiles (
+CREATE TABLE profile (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) NOT NULL,
     fitness_goals VARCHAR(255) DEFAULT NULL,
@@ -45,7 +45,6 @@ CREATE TABLE profiles (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Jag~ Payment Table
 CREATE TABLE payment_information (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -75,4 +74,30 @@ CREATE TABLE match_requests (
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
     UNIQUE KEY unique_request (sender_id, receiver_id)
+);
+
+CREATE TABLE workout_check_ins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    check_in_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    notes TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_date (user_id, check_in_date)
+);
+
+CREATE TABLE blocked_users (
+    blocker_id INT NOT NULL,
+    blocked_id INT NOT NULL,
+    PRIMARY KEY (blocker_id, blocked_id),
+    FOREIGN KEY (blocker_id) REFERENCES users(id),
+    FOREIGN KEY (blocked_id) REFERENCES users(id)
+);
+
+CREATE TABLE reports (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    message_id INT(11) NOT NULL,
+    reporter_id INT(11) NOT NULL,
+    reason TEXT COLLATE utf8mb4_general_ci NOT NULL,
+    reported_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

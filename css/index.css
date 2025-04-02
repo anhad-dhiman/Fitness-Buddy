@@ -1,0 +1,139 @@
+.trainer-card {
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+}
+
+.trainer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.trainer-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.trainer-bio {
+    font-size: 0.9rem;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+/* Consistency Tracker Styles */
+.calendar-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.calendar-box {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    cursor: default;
+    transition: transform 0.2s;
+}
+
+.calendar-box:hover {
+    transform: scale(1.1);
+}
+
+.streak-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.check-in-btn {
+    transition: all 0.3s;
+}
+
+.check-in-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Achievement badges */
+.achievement-starter {
+    color: rgba(108, 117, 125, 0.01);
+}
+
+.achievement-bronze {
+    color: #cd7f32;
+}
+
+.achievement-silver {
+    color: rgba(192, 192, 192, 0.04);
+}
+
+.achievement-gold {
+    color: #ffd700;
+}
+
+.progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.post-preview {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.btn-primary,
+.btn-success {
+    background-color: salmon;
+    border-color: salmon;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    background-color: #ff7c66;
+    border-color: #ff7c66;
+}
+
+.btn-outline-primary {
+    color: salmon;
+    border-color: salmon;
+}
+
+.btn-outline-primary:hover {
+    background-color: salmon;
+    color: white;
+}
+
+.bg-salmon {
+    background-color: #FA8072 !important;
+}
+
+.text-salmon {
+    color: #FA8072 !important;
+}
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position-x: 1rem;
+    }
+}

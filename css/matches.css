@@ -1,0 +1,42 @@
+ /* Profile picture sizing */
+ .profile-pic {
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+     object-fit: cover;
+ }
+
+ /* Match cards styling */
+ .match-score {
+     font-weight: bold;
+     color: #28a745;
+ }
+
+ /* Card height control */
+ .card {
+     transition: transform 0.3s;
+ }
+
+ .card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .match-score {
+     background-color: salmon;
+     color: white;
+     padding: 0.25rem 0.5rem;
+     border-radius: 1rem;
+ }
+
+ .request-pending {
+     border-left: 4px solid #ffc107;
+ }
+
+ .request-accepted {
+     border-left: 4px solid #28a745;
+ }
+
+ .request-declined {
+     border-left: 4px solid #dc3545;
+ }

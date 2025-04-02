@@ -86,12 +86,6 @@ function capFirstLetter($string)
                     </li>
                 </ul>
 
-                <!-- Centered search form -->
-                <form class="d-flex mx-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
-
                 <!-- Right-aligned logout -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">

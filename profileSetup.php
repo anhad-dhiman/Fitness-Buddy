@@ -202,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <!-- Nav Bar Starts -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: salmon;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">Fitness Buddy</a>
@@ -211,25 +212,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left navigation items -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="myProfile.php">Profile</a>
-                        <!-- Jag~ Changed link from profileSetup.php to myProfile.php-->
+                        <a class="nav-link" href="myProfile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Matches</a>
+                        <a class="nav-link" href="matches.php">Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="send_message.php">Message</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="forum.php">Forum</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
+
+                <!-- Right-aligned logout -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="logout.php" class="btn btn-outline-light">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- Nav Bar Ends Here -->
 
     <div class="form-container">
         <form action="" method="POST" enctype="multipart/form-data">
@@ -290,10 +298,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             id="intermediate">
                         <label class="form-check-label" for="intermediate">Intermediate</label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check me-4">
                         <input class="form-check-input" type="radio" name="experience_level" value="advanced"
                             id="advanced">
                         <label class="form-check-label" for="advanced">Advanced</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="experience_level" value="trainer"
+                            id="trainer">
+                        <label class="form-check-label" for="trainer">Trainer</label>
                     </div>
                 </div>
             </div>
