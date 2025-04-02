@@ -371,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_action'])) {
                                     <div class="card-footer bg-white">
                                         <form method="POST">
                                             <input type="hidden" name="receiver_id" value="<?= $match['id'] ?>">
-                                            <button type="submit" name="send_request" class="btn btn-primary">Send Match
+                                            <button type="submit" name="send_request" class="btn">Send Match
                                                 Request</button>
                                         </form>
                                     </div>

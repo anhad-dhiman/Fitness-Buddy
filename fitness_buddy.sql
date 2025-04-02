@@ -94,10 +94,19 @@ CREATE TABLE blocked_users (
     FOREIGN KEY (blocked_id) REFERENCES users(id)
 );
 
-CREATE TABLE reports (
+CREATE TABLE replies (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    post_id INT(11) NOT NULL,
+    user_id INT(11) NOT NULL,
+    content TEXT NOT NULL COLLATE utf8mb4_general_ci,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE reported_messages (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     message_id INT(11) NOT NULL,
     reporter_id INT(11) NOT NULL,
-    reason TEXT COLLATE utf8mb4_general_ci NOT NULL,
+    reason TEXT NOT NULL COLLATE utf8mb4_general_ci,
     reported_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+

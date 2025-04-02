@@ -40,3 +40,13 @@
  .request-declined {
      border-left: 4px solid #dc3545;
  }
+
+ .btn {
+     background-color: #ff7c66;
+     color: white;
+ }
+
+ .btn:hover {
+     background-color: #ff7c66;
+     color: white;
+ }
